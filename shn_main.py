@@ -1,8 +1,8 @@
 # This line includes 79 characters because PEP8 says,"Limit ... 79 characters"
 
 # 作者：bobby233 <mczsjzsjz@outlook.com>
-# 版本：v0.0.1
-# 更新时间：2020/10/1
+# 版本：v0.0.2
+# 更新时间：2020-10-06
 
 """SHN社工库的主要操作
 
@@ -34,6 +34,7 @@ class Person:
         "sex": None,
         "birth": None,
         "grade": None,
+        "class_": None,
         "height": None,
         "weight": None,
         "hair": None,
@@ -139,7 +140,7 @@ def modify_db(person: Person, file="people.json"):
         db[person.basics["shnid"]]["basics"] = person.basics
         db[person.basics["shnid"]]["things"] = person.things
         dump(db, f)
-def search_basic(file="people.json", **kwargs):
+def search_basics(file="people.json", **kwargs):
     """在数据库中查找基本信息，需要提供一系列的关键词"""
     with open(file) as f:
         from json import load
@@ -150,20 +151,24 @@ def search_basic(file="people.json", **kwargs):
     for i in range(len(db)):
         dbv = list(db.values())[i]["basics"]
         for j in range(len(kwk)):
-            # 生日、号码专用搜索（使用正则）
-            if kwk[j] in ("birth", "phone", "qq_no", "qq_ps", "uid_no", "uid_ps"):
-                from re import fullmatch
-                if fullmatch(kwargs[kwk[j]], str(dbv[kwk[j]])):
-                    if dbv["shnid"] not in people.keys():
-                        people[dbv["shnid"]] = 1
-                    else:
-                        people[dbv["shnid"]] += 1
-            else:
+            # 使用正则
+            from re import fullmatch
+            if fullmatch(kwargs[kwk[j]], str(dbv[kwk[j]])):
+                if dbv["shnid"] not in people.keys():
+                    people[dbv["shnid"]] = 1
+                else:
+                    people[dbv["shnid"]] += 1
+            elif fullmatch(str(dbv[kwk[j]]), kwargs[kwk[j]]):
+                if dbv["shnid"] not in people.keys():
+                    people[dbv["shnid"]] = 1
+                else:
+                    people[dbv["shnid"]] += 1
+            """else:
                 if dbv[kwk[j]] == kwargs[kwk[j]]:
                     if dbv["shnid"] not in people.keys():
                         people[dbv["shnid"]] = 1
                     else:
-                        people[dbv["shnid"]] += 1
+                        people[dbv["shnid"]] += 1"""
     # 排序后总结输出结果
     people = sorted(people.items(), key=lambda x:x[1], reverse=True)
     if people != []:

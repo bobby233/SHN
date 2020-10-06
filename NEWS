@@ -1,0 +1,11 @@
+# This line includes 79 characters because PEP8 says,"Limit ... 79 characters"
+中文的七十九个字符限制将类似于这个字符串，包括这些标点。！￥；：，【】、……（）
+
+v0.0.1 -> v0.0.2
+日期及时间：2020-10-06 15:28
+代码编写人员：bobby233
+日志编写人员：bobby233
+更新日志：
+- 新增 基本（basic）模板——班级（class_）
+- 修改 所有基本（basic）项的搜索操作为正则表达式匹配（保留原代码）
+- 修改 基本（basic）项的单向正则匹配改为双向匹配
