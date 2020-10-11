@@ -1,7 +1,7 @@
 # This line includes 79 characters because PEP8 says,"Limit ... 79 characters"
 中文的七十九个字符限制将类似于这个字符串，包括这些标点。！￥；：，【】、……（）
 
-v0.0.1 -> v0.0.2
+shn_main.py :: v0.0.1 -> v0.0.2
 日期及时间：2020-10-06 15:28
 代码编写人员：bobby233
 日志编写人员：bobby233
